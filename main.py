@@ -27,15 +27,41 @@ with app.app_context():
         manager_role = Role(name='store_manager')
         db.session.add(manager_role)
     
-    # admin_user = User.query.filter_by(email_id = 'admin@gmail.com').first()
+    # admin_user = User.query.filter_by(user_email = 'admin@gmail.com').first()
     # if not admin_user:
-    #     admin_user 
+    #     admin_user = User(
+    #         user_email = "admin@gmail.com",
+    #         password = "1234567890",
+    #         user_name = "Super Admin"
+    #     )
+    #     db.session.add(admin_user)
+    #     # print(admin_user.id)
+    #     admin_user_details = User.query.filter_by(user_email = "admin@gmail.com").first()
+    #     admin_role = Role.query.filter_by(name='admin').first()
+
+    #     user_id = admin_user_details.user_id
+    #     role_id = admin_role.id
+
+    #     user_role = UserRole(user_id = user_id, role_id = role_id)
+    #     db.session.add(user_role)
+
+    admin_user = User.query.filter_by(user_email = 'admin@gmail.com').first()
+    if not admin_user:
+        admin_role = Role.query.filter_by(name='admin').first()
+        store_manager_role = Role.query.filter_by(name='store_manager').first()
+        admin_user = User(
+            user_email = "admin@gmail.com",
+            password = "1234567890",
+            user_name = "Super Admin",
+            roles = [admin_role,store_manager_role]
+        )
+        db.session.add(admin_user)
 
     db.session.commit()
 
 @app.route('/')
 def index():
-    return render_template('hello.html')
+    return render_template('login.html')
 
 @app.route('/about')
 def about():
@@ -44,7 +70,3 @@ def about():
 
 if __name__ == '__main__':
     app.run()
-
-
-# '/'
-# '/about'

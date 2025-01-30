@@ -9,6 +9,7 @@ class User(db.Model):
     password = db.Column(db.String(250), nullable=False)
     user_name = db.Column(db.String(50), nullable=False)
 
+    roles = db.relationship('Role', secondary='user_role', backref='users', lazy=True)
     customer_details = db.relationship('Customer', backref = 'user', lazy=True, uselist=False)
     store_manager_details = db.relationship('StoreManager', backref = 'user', lazy=True, uselist=False)
 
