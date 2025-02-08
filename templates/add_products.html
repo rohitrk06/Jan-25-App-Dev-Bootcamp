@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %} Add Product - Grocery Store {% endblock %}
+
+{% block content %}
+
+<div class="container-fluid row justify-content-center mt-5">
+    <h1 class="text-center">Add Product</h1>
+    <form class="col-6" action="#" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Product Name</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" name = "name">
+        </div>
+        <div class="mb-3">
+            <label for="inputPassword5" class="form-label">Description</label>
+            <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" name = "description">
+        </div>
+        <div class="mb-3">
+            <label for="inputPassword" class="form-label">Price</label>
+            <input type="number" id="inputPassword" class="form-control" aria-describedby="passwordHelpBlock" name = "price">
+        </div>        
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Cost Price</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1"  name = "cost_price">
+        </div>
+        
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Uplaod Product documents</label>
+            <input type="file" class="form-control" id="exampleFormControlInput1"  accept=".pdf" name = "product_file">
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label" for="inlineFormCustomSelectPref">Preference</label>
+            <select class="form-control" id="inlineFormCustomSelectPref" name="category_id">
+                <option selected>Choose...</option>
+                {% for category in all_categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>    
+
+</div>
+
+{% endblock %}

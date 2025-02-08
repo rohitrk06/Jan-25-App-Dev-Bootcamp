@@ -42,3 +42,22 @@ class Customer(db.Model):
     address = db.Column(db.String(50), nullable = False)
     prefered_mode_of_payment = db.Column(db.String(50), nullable = False)
     phone_number = db.Column(db.String(50), nullable = False)
+
+
+class Category(db.Model):
+
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    name = db.Column(db.String(50), nullable = False)
+    description = db.Column(db.String(50), nullable = False)
+
+    products = db.relationship('Product', backref = 'category', lazy=True)
+
+class Product(db.Model):
+    
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    name = db.Column(db.String(50), nullable = False)
+    description = db.Column(db.String(50), nullable = False)
+    price = db.Column(db.Float, nullable = False)
+    cost_price = db.Column(db.Float, nullable = False) 
+    product_details_url = db.Column(db.String(200), nullable = False) 
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
